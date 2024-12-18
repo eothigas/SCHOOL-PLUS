@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --logo-color: rgb(84,23, 215);
+    --placeholder-color: rgba(84,23, 215, 0.35);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    height: 100dvh;
+    overflow: hidden;
+}
+
+/* Remove as setas do input type="number" */
+input[type="number"] {
+    -moz-appearance: textfield; /* Firefox */
+    -webkit-appearance: none;   /* Chrome, Safari */
+    appearance: none;           /* Para navegadores mais recentes */
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.start-logo, .login-page {
+    height: 100dvh; 
+}
+
+.login-area{
+    height: 100dvh;
+}
+
+.invisible {
+    display: none !important;
+}
+
+.name-logo {
+    color: var(--logo-color);
+    font-weight: 600;
+}
+
+.input-group {
+    max-width: 508px !important;
+    margin: 0 auto;
+}
+
+input, .view {
+    color: var(--logo-color) !important;
+    border-color: var(--logo-color) !important;
+}
+
+::placeholder {
+    color: var(--placeholder-color) !important;
+}
+
+.btn-login {
+    border: 2px solid var(--logo-color) !important;
+    width: 150px;
+    max-width: 150px;
+    margin: 0 auto;
+    color: var(--logo-color) !important;
+}
+
+.btn-login:hover {
+    background-color: var(--logo-color);
+    color: white !important;
+}
+
+.bg-login {
+    background-image: url(../images/bg-login.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-left: 10px solid var(--logo-color);
+    position: relative;
+}
+
+.overlay {
+    background-color: rgba(0,0,0, 0.7);
+    height: 100%;
+    color: white;
+}
+
+.bg-frase {
+    color: var(--logo-color);
+    font-weight: bold;
+}
+
+.frase {
+    position: absolute;
+    max-width: 350px;
+    bottom: 0;
+    right: 10px
+}
+
+@media screen and (max-width: 1400px) {
+    
+    body {
+        overflow-y: auto;
+    }
+
+    .bg-login {
+        display: none;
+    }
+
+    .login-area {
+        flex: 0 0 100%; /* Define largura de 100% */
+        max-width: 100%; /* Garante o limite máximo de largura */
+        /* margin: 0 !important; */
+    }
+
+    /* .btn-login {
+        margin-bottom: 15px !important;
+    } */
+
+
+}
+
+
