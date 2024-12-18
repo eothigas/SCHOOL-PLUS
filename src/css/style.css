@@ -16,11 +16,11 @@ body {
     overflow: hidden;
 }
 
-/* Remove as setas do input type="number" */
+
 input[type="number"] {
-    -moz-appearance: textfield; /* Firefox */
-    -webkit-appearance: none;   /* Chrome, Safari */
-    appearance: none;           /* Para navegadores mais recentes */
+    -moz-appearance: textfield; 
+    -webkit-appearance: none;   
+    appearance: none;          
 }
 
 input[type="number"]::-webkit-outer-spin-button,
