@@ -1,3 +1,7 @@
+body {
+    width: 100dvw;
+}
+
 .no-link {
     text-decoration: none;
     color: var(--logo-color);
@@ -46,8 +50,25 @@
     border-radius: 10px;
 }
 
+.card-links {
+    display: flex;
+    align-items: center;
+    width: 200px;
+    height: 100px;
+    max-width: 180px;
+    justify-content: center;
+}
+
 @media screen and (max-width: 768px) {
     
+    body {
+        flex-direction: column;
+    }
+
+    .main-content {
+        flex-direction: column;
+    }
+
     .standard-navigation {
         display: none !important;
     }
@@ -74,4 +95,5 @@
     .menu-buttons .nav-link i {
         font-size: 1.5rem;
     }
+
 }
