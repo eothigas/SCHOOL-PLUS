@@ -1,5 +1,24 @@
 body {
     width: 100dvw;
+    max-height: 100dvh;
+    overflow: hidden;
+}
+
+/* .swiper {
+    width: 600px;
+    height: 500px;
+} */
+
+h1, h2, h5, h6, .link {
+    color: var(--logo-color) !important;
+}
+
+.swiper-pagination {
+    margin: -10px 0;
+}
+
+.swiper-pagination-bullet {
+    background-color: var(--logo-color);
 }
 
 .no-link {
@@ -75,6 +94,9 @@ body {
 
     .navigationbar-responsive {
         display: flex !important;
+        height: 121px;
+        justify-content: center;
+        align-items: center;
     }
 
     .menu-buttons {
@@ -94,6 +116,14 @@ body {
     
     .menu-buttons .nav-link i {
         font-size: 1.5rem;
+    }
+
+    .notifications-site {
+        display: none !important;
+    }
+
+    .swiper {
+        border: none !important;
     }
 
 }
