@@ -1,5 +1,6 @@
 body {
     width: 100dvw;
+    height: 100dvh;
     max-height: 100dvh;
     overflow: hidden;
 }
@@ -13,8 +14,18 @@ h1, h2, h5, h6, .link {
     color: var(--logo-color) !important;
 }
 
+.hidenav {
+    width: 0 !important;
+    display: none;
+}
+
+#showMenu {
+    display: none;
+}
+
 .swiper-pagination {
     margin: -10px 0;
+    
 }
 
 .swiper-pagination-bullet {

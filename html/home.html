@@ -14,7 +14,11 @@
 </head>
 <body class="d-flex">
     
-    <nav class="d-flex standard-navigation" style="max-width: 268px;">
+    <button class="btn btn-primary mt-4 text-center" id='showMenu' type='button' style="max-height: 70px;">
+        Mostrar Barra
+    </button>
+
+    <nav class="standard-navigation" id="navbar-main">
         <div class="d-flex flex-column justify-content-between p-3" style="height: 100dvh; border-right: 2px solid var(--logo-color);" data-bs-theme="dark">
             <div>
                 <a class="no-link" href="/">
@@ -24,16 +28,19 @@
                     </div>
                 </a>
                 <hr class="divider-color">
+                <button class="btn btn-primary mb-3" id="hide-menu" type="button">
+                    Esconder Barra
+                </button>
                 <ul class="nav nav-pills flex-column mb-auto gap-2 menu-buttons">
                     <li class="nav-item">
                         <a href="../html/home.html" class="nav-link active d-flex gap-3 align-items-center">
-                            <i class="bi bi-house" ></i>
+                            <i class="bi bi-house"></i>
                             Home
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="../html/myschool.html" class="nav-link d-flex gap-3 align-items-center">
-                            <i class="bi bi-clipboard" ></i>
+                            <i class="bi bi-clipboard"></i>
                             Minha Escola
                         </a>
                     </li>
@@ -111,12 +118,13 @@
 
     <div class="main-content w-100 overflow-y-auto overflow-x-hidden">
         
-        <div class="container-fluid border d-flex col-12 mt-4 py-3">
+        <div class="container-fluid border-bottom d-flex justify-content-between col-12 my-2 py-4">
 
-            <div class="swiper border-end me-4">
+            <div class="swiper border-end me-4 pb-5">
                 <!-- Additional required wrapper -->
                 <div class="swiper-wrapper">
                   <!-- Slides -->
+                  <div class="swiper-slide d-flex justify-content-center"><img class="img-fluid" src="../src/images/psd-backtoschool.jpg" alt=""></div>
                   <div class="swiper-slide d-flex justify-content-center"><img class="img-fluid" src="../src/images/psd-study.png" alt=""></div>
                   <div class="swiper-slide d-flex justify-content-center"><img class="img-fluid" src="../src/images/psd-backtoschool.jpg" alt=""></div>
                   <div class="swiper-slide d-flex justify-content-center"><img class="img-fluid" src="../src/images/psd-study.png" alt=""></div>
@@ -171,7 +179,7 @@
 
         </div>
 
-        <div class="d-flex align-items-center justify-content-center border-top flex-wrap col-md-12 gap-4 ms-2 py-4 mt-4">
+        <div class="d-flex align-items-center justify-content-center flex-wrap col-md-12 gap-4 ms-2 py-4 mt-4">
 
             <div class="card p-2 card-links">
                 <h5 class="card-title mb-0">

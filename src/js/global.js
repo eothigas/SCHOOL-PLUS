@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
         eyeIconConfirm.classList.toggle('bi-eye-slash');
 
     });
+
 });
 
 const swiper = new Swiper('.swiper', {
@@ -37,4 +38,30 @@ const swiper = new Swiper('.swiper', {
       el: '.swiper-pagination',
       clickable: true, 
     },
+});
+
+// Obtém o menu de navegação
+const navBarmain = document.getElementById('navbar-main');
+const barShow = document.getElementById('showMenu');
+
+// Função para esconder o menu
+function hideMenu(evento, callback) {
+    if (evento === 'click') {
+        callback();
+    }
+}
+
+// Adiciona o evento de clique no botão para esconder o menu
+document.getElementById('hide-menu').addEventListener('click', function() {
+    hideMenu('click', function() {
+        navBarmain.classList.add('hidenav'); // Esconde o menu
+        barShow.style.display = 'flex';
+    });
+});
+
+document.getElementById('showMenu').addEventListener('click', function() {
+    hideMenu('click', function() {
+        navBarmain.classList.remove('hidenav'); // Esconde o menu
+        barShow.style.display = 'none';
+    });
 });
