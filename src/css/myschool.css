@@ -1,0 +1,32 @@
+.main-container {
+    border-top: 3px solid;
+    border-bottom: 3px solid;
+    border-radius: 3px;
+    border-color: var(--logo-color);
+}
+
+.button-container {
+    /* max-width: 100dvw; */
+    grid-template-columns: (2, 1fr);
+}
+
+.buttons {
+    padding: 5px;
+    background-color: var(--logo-color);
+    border-radius: 10px;
+    width: 1850px;
+    gap: 10px;
+}
+
+.title-button {
+    color: white;
+}
+
+.container-img {
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: rgba(228, 228, 228, 1);
+    border-radius: 10px;
+    border: 2px var(--logo-color) solid;
+}

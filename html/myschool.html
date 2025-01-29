@@ -9,10 +9,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../src/css/style.css">
     <link rel="stylesheet" href="../src/css/home.css">
+    <link rel="stylesheet" href="../src/css/myschool.css">
     <link rel="icon" type="image/ico" href="/src/images/logo1.png">
     <title>School+ -- Minha Escola</title>
 </head>
 <body class="d-flex">
+    
     
     
     <nav class="d-flex standard-navigation" style="max-width: 268px;">
@@ -25,6 +27,11 @@
                     </div>
                 </a>
                 <hr class="divider-color">
+
+                <button class="btn btn-primary mt-4 text-center" id='showMenu' type='button' style="max-height: 70px;">
+                    Mostrar Barra
+                </button>
+                
                 <ul class="nav nav-pills flex-column mb-auto gap-2 menu-buttons">
                     <li class="nav-item">
                         <a href="../html/home.html" class="nav-link d-flex gap-3 align-items-center">
@@ -110,18 +117,34 @@
         </div>
     </nav>
     
-    <div class="container d-flex gap-3 justify-content-center text-center border my-4 py-3">
-        <div class="container border rounded">
-            <h4>Rendimento</h4>
+    <div class="main-container overflow-hidden container-fluid d-flex flex-column gap-3 justify-content-between text-center my-5 mx-2 py-3">
+        <div class="button-container container-fluid d-flex justify-content-between m-0 p-0 pt-5 gap-3 text-center align-items-center" style="max-height: 120px;">
+            <div class="buttons border justify-content-center">
+                <h4 class="m-0 title-button">Rendimento</h4>
+            </div>
+            <div class="buttons border">
+                <h4 class="m-0 title-button">Salas</h4>
+            </div>
+            <div class="buttons border">
+                <h4 class="m-0 title-button">Professores</h4>
+            </div>
+            <div class="buttons border">
+                <h4 class="m-0 title-button">Alunos</h4>
+            </div>
+
         </div>
-        <div class="container border rounded">
-            <h4>Salas</h4>
-        </div>
-        <div class="container border rounded">
-            <h4>Professores</h4>
-        </div>
-        <div class="container border rounded">
-            <h4>Alunos</h4>
+        <div class="container-fluid m-0" style="max-height: 400px; height: 400px;">
+            <div class="container frase-container">
+                <div class="container d-flex container-img p-5">
+                    <img src="../src/images/study.jpg" class="img-fluid rounded rounded-circle" style="width: 150px; height: 135px;" alt="">
+                    <div class="text-img d-flex flex-column">
+                        <h4 class="text-start">"Aprender é como remar contra a correnteza: 
+                            assim que você para, volta para trás."
+                            <h6 class="text-start">Edward Benjamin Britten</h6>
+                        </h4>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -153,6 +176,8 @@
             </li>
         </ul>
     </div>
+
+    <script src="../src/js/global.js"></script>
 
 </body>
 </html>
