@@ -30,3 +30,12 @@
     border-radius: 10px;
     border: 2px var(--logo-color) solid;
 }
+
+.img-motivational {
+    border: 3px solid var(--logo-color);
+}
+
+.author-phrase {
+    font-style: italic;
+    font-weight: 700;
+}
