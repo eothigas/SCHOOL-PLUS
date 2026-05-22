@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(composer --version)",
+      "Bash(php --version)",
+      "PowerShell(composer create-project *)",
+      "PowerShell(New-Item *)",
+      "PowerShell(cmd /c \"rd /s /q C:\\\\xampp\\\\htdocs\\\\_Pessoal\\\\SCHOOL-PLUS\\\\vendor\" 2>&1)",
+      "PowerShell(Get-Process *)",
+      "Bash(php artisan *)",
+      "Bash(Test-Path *)"
+    ]
+  }
+}
