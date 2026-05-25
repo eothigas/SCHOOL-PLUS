@@ -7,8 +7,11 @@
 @endsection
 
 @section('content')
-<div class="d-flex align-items-center justify-content-between mb-4">
-    <h4 class="mb-0 fw-bold">Períodos Letivos</h4>
+<div class="sp-page-hdr">
+    <div>
+        <h1 class="sp-page-hdr-title">Períodos Letivos</h1>
+        <div class="sp-page-hdr-sub">Anos e semestres letivos da escola</div>
+    </div>
     <a href="{{ route('periodos.create') }}" class="btn btn-primary btn-sm">
         <i class="bi bi-plus-lg me-1"></i>Novo Período
     </a>
@@ -23,64 +26,69 @@
     </select>
     <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
     @if(request('status'))
-    <a href="{{ route('periodos.index') }}" class="btn btn-outline-danger"><i class="bi bi-x-lg"></i></a>
+    <a href="{{ route('periodos.index') }}" class="btn btn-outline-danger" data-no-loading><i class="bi bi-x-lg"></i></a>
     @endif
 </form>
 
-<div class="card-sp">
-    <div class="table-responsive">
-        <table class="table table-sp table-hover mb-0">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Início</th>
-                    <th>Fim</th>
-                    <th>Turmas</th>
-                    <th>Status</th>
-                    <th class="text-end">Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse($periodos as $periodo)
-                <tr>
-                    <td class="fw-semibold">{{ $periodo->nome }}</td>
-                    <td class="text-muted" style="font-size:13px">{{ $periodo->data_inicio->format('d/m/Y') }}</td>
-                    <td class="text-muted" style="font-size:13px">{{ $periodo->data_fim->format('d/m/Y') }}</td>
-                    <td class="text-muted">{{ $periodo->turmas->count() }}</td>
-                    <td>
-                        @php
-                        $badge = match($periodo->status) {
-                            'ativo'        => 'badge-status-ativa',
-                            'planejamento' => 'badge-status-trancada',
-                            default        => 'badge-status-encerrada',
-                        };
-                        @endphp
-                        <span class="badge rounded-pill {{ $badge }}" style="font-size:10px">
-                            {{ ucfirst($periodo->status) }}
-                        </span>
-                    </td>
-                    <td class="text-end">
-                        <a href="{{ route('periodos.show', $periodo) }}" class="btn btn-sm btn-outline-secondary me-1">
+<div class="sp-card" style="padding:0">
+    <table class="sp-table">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Início</th>
+                <th>Fim</th>
+                <th>Turmas</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse($periodos as $periodo)
+            @php
+            $badge = match($periodo->status) {
+                'ativo'        => 'badge-status-ativa',
+                'planejamento' => 'badge-status-trancada',
+                default        => 'badge-status-encerrada',
+            };
+            @endphp
+            <tr>
+                <td style="font-weight:600">{{ $periodo->nome }}</td>
+                <td style="font-size:13px;color:var(--text-soft)">{{ $periodo->data_inicio->format('d/m/Y') }}</td>
+                <td style="font-size:13px;color:var(--text-soft)">{{ $periodo->data_fim->format('d/m/Y') }}</td>
+                <td style="font-size:13px;color:var(--text-soft)">{{ $periodo->turmas->count() }}</td>
+                <td>
+                    <span class="badge rounded-pill {{ $badge }}" style="font-size:11px">
+                        {{ ucfirst($periodo->status) }}
+                    </span>
+                </td>
+                <td style="text-align:right">
+                    <div style="display:flex;justify-content:flex-end;gap:6px">
+                        <a href="{{ route('periodos.show', $periodo) }}" class="icon-btn" title="Ver detalhes">
                             <i class="bi bi-eye"></i>
                         </a>
-                        <a href="{{ route('periodos.edit', $periodo) }}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{ route('periodos.edit', $periodo) }}" class="icon-btn" title="Editar">
                             <i class="bi bi-pencil"></i>
                         </a>
-                    </td>
-                </tr>
-                @empty
-                <tr>
-                    <td colspan="6" class="text-center text-muted py-5">
-                        Nenhum período cadastrado.
-                        <a href="{{ route('periodos.create') }}">Criar primeiro período</a>
-                    </td>
-                </tr>
-                @endforelse
-            </tbody>
-        </table>
-    </div>
+                    </div>
+                </td>
+            </tr>
+            @empty
+            <tr>
+                <td colspan="6">
+                    <div class="sp-empty">
+                        <i class="bi bi-calendar3"></i>
+                        <div class="sp-empty-title">Nenhum período cadastrado</div>
+                        <div class="sp-empty-sub">
+                            <a href="{{ route('periodos.create') }}">Criar primeiro período</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            @endforelse
+        </tbody>
+    </table>
     @if($periodos->hasPages())
-    <div class="p-3 border-top" style="border-color:#1e2d47!important">
+    <div style="padding:14px 20px;border-top:1px solid var(--border)">
         {{ $periodos->links() }}
     </div>
     @endif

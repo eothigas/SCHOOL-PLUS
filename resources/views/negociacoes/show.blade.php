@@ -13,7 +13,7 @@
             Negociação #{{ $negociacao->id }}
         </h4>
         <div style="font-size:13px;color:var(--text-soft)">
-            {{ $negociacao->matricula->aluno->usuario->nome ?? '—' }}
+            {{ $negociacao->matricula->aluno->usuario->nome ?? '-' }}
             · {{ \Carbon\Carbon::parse($negociacao->criado_em)->format('d/m/Y') }}
         </div>
     </div>
@@ -58,10 +58,10 @@
             <div class="section-label">Detalhes</div>
             <dl class="row mb-0" style="font-size:13px;row-gap:8px">
                 <dt class="col-5" style="color:var(--text-soft);font-weight:500">Aluno</dt>
-                <dd class="col-7 fw-semibold">{{ $negociacao->matricula->aluno->usuario->nome ?? '—' }}</dd>
+                <dd class="col-7 fw-semibold">{{ $negociacao->matricula->aluno->usuario->nome ?? '-' }}</dd>
 
                 <dt class="col-5" style="color:var(--text-soft);font-weight:500">Operador</dt>
-                <dd class="col-7">{{ $negociacao->usuario->nome ?? '—' }}</dd>
+                <dd class="col-7">{{ $negociacao->usuario->nome ?? '-' }}</dd>
 
                 <dt class="col-5" style="color:var(--text-soft);font-weight:500">Registrado em</dt>
                 <dd class="col-7">{{ \Carbon\Carbon::parse($negociacao->criado_em)->format('d/m/Y H:i') }}</dd>

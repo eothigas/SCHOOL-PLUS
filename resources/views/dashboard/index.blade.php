@@ -102,7 +102,7 @@
                                 {{ $turma->nome }}
                             </a>
                         </td>
-                        <td style="color:var(--text-soft);font-size:12px">{{ $turma->curso->nome ?? '—' }}</td>
+                        <td style="color:var(--text-soft);font-size:12px">{{ $turma->curso->nome ?? '-' }}</td>
                         <td><span class="badge-sp badge-purple">{{ ucfirst($turma->turno) }}</span></td>
                         <td><span class="badge-status-{{ $turma->status }}">{{ str_replace('_',' ',$turma->status) }}</span></td>
                     </tr>
@@ -136,8 +136,8 @@
                             <i class="bi bi-person" style="color:var(--purple);font-size:16px"></i>
                         </div>
                         <div>
-                            <div style="font-size:13px;font-weight:600">{{ $mat->aluno->usuario->nome ?? '—' }}</div>
-                            <div style="font-size:11px;color:var(--text-soft)">{{ $mat->turma->nome ?? '—' }}</div>
+                            <div style="font-size:13px;font-weight:600">{{ $mat->aluno->usuario->nome ?? '-' }}</div>
+                            <div style="font-size:11px;color:var(--text-soft)">{{ $mat->turma->nome ?? '-' }}</div>
                         </div>
                     </div>
                     <span class="badge-status-{{ $mat->status }}">{{ $mat->status }}</span>
@@ -157,7 +157,7 @@
         <div class="row g-2">
             @foreach([
                 ['route'=>'alunos.create',    'icon'=>'bi-person-plus',    'label'=>'Novo Aluno',   'color'=>'var(--purple)','bg'=>'var(--purple-light)'],
-                ['route'=>'turmas.create',    'icon'=>'bi-grid-plus',      'label'=>'Nova Turma',   'color'=>'var(--green)', 'bg'=>'var(--green-bg)'],
+                ['route'=>'turmas.create',    'icon'=>'bi-grid',      'label'=>'Nova Turma',   'color'=>'var(--green)', 'bg'=>'var(--green-bg)'],
                 ['route'=>'matriculas.create','icon'=>'bi-clipboard-plus', 'label'=>'Matricular',   'color'=>'var(--amber)', 'bg'=>'var(--amber-bg)'],
                 ['route'=>'cursos.create',    'icon'=>'bi-book',           'label'=>'Novo Curso',   'color'=>'var(--blue)',  'bg'=>'var(--blue-bg)'],
                 ['route'=>'disciplinas.create','icon'=>'bi-journal-plus',  'label'=>'Disciplina',   'color'=>'var(--purple)','bg'=>'var(--purple-light)'],

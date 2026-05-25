@@ -8,8 +8,11 @@
 @endsection
 
 @section('content')
-<div class="d-flex align-items-center justify-content-between mb-4">
-    <h4 class="mb-0 fw-bold">Alunos</h4>
+<div class="sp-page-hdr">
+    <div>
+        <h1 class="sp-page-hdr-title">Alunos</h1>
+        <div class="sp-page-hdr-sub">Gerencie os alunos matriculados</div>
+    </div>
     <a href="{{ route('alunos.create') }}" class="btn btn-primary btn-sm">
         <i class="bi bi-plus-lg me-1"></i>Novo Aluno
     </a>
@@ -17,63 +20,76 @@
 
 {{-- Busca --}}
 <form method="GET" class="mb-3">
-    <div class="input-group" style="max-width:400px">
-        <input type="text" name="busca" class="form-control" placeholder="Nome, matrícula ou e-mail..."
-               value="{{ request('busca') }}">
-        <button class="btn btn-outline-secondary" type="submit">
-            <i class="bi bi-search"></i>
-        </button>
+    <div class="sp-search" style="max-width:400px">
+        <i class="bi bi-search sp-search-icon"></i>
+        <input type="text" name="busca" class="form-control sp-search-input"
+               placeholder="Nome, matrícula ou e-mail..." value="{{ request('busca') }}">
         @if(request('busca'))
-        <a href="{{ route('alunos.index') }}" class="btn btn-outline-danger">
+        <a href="{{ route('alunos.index') }}" class="sp-search-clear" data-no-loading>
             <i class="bi bi-x-lg"></i>
         </a>
         @endif
     </div>
 </form>
 
-<div class="card-sp">
-    <div class="table-responsive">
-        <table class="table table-sp table-hover mb-0">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Matrícula</th>
-                    <th>E-mail</th>
-                    <th>CPF</th>
-                    <th class="text-end">Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse($alunos as $aluno)
-                <tr>
-                    <td>
-                        <div class="fw-semibold">{{ $aluno->usuario->nome ?? '—' }}</div>
-                    </td>
-                    <td><code>{{ $aluno->matricula }}</code></td>
-                    <td class="text-muted" style="font-size:13px">{{ $aluno->usuario->email ?? '—' }}</td>
-                    <td class="text-muted" style="font-size:13px">{{ $aluno->cpf ?? '—' }}</td>
-                    <td class="text-end">
-                        <a href="{{ route('alunos.show', $aluno) }}" class="btn btn-sm btn-outline-secondary me-1">
+<div class="sp-card" style="padding:0">
+    <table class="sp-table">
+        <thead>
+            <tr>
+                <th>Aluno</th>
+                <th>Matrícula</th>
+                <th>E-mail</th>
+                <th>CPF</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse($alunos as $aluno)
+            @php
+                $nome   = $aluno->usuario->nome ?? '';
+                $parts  = explode(' ', $nome);
+                $initials = mb_strtoupper(mb_substr($parts[0],0,1) . (isset($parts[1]) ? mb_substr($parts[1],0,1) : ''));
+                $colors = ['','av-green','av-amber','av-blue','av-red'];
+                $color  = $colors[$aluno->id % 5];
+            @endphp
+            <tr>
+                <td>
+                    <div style="display:flex;align-items:center;gap:11px">
+                        <div class="idx-avatar {{ $color }}">{{ $initials }}</div>
+                        <div style="font-weight:600;font-size:14px">{{ $nome ?: '-' }}</div>
+                    </div>
+                </td>
+                <td><code style="font-size:12px;color:var(--purple)">{{ $aluno->matricula }}</code></td>
+                <td style="font-size:13px;color:var(--text-soft)">{{ $aluno->usuario->email ?? '-' }}</td>
+                <td style="font-size:13px;color:var(--text-soft)">{{ $aluno->cpf ?? '-' }}</td>
+                <td style="text-align:right">
+                    <div style="display:flex;justify-content:flex-end;gap:6px">
+                        <a href="{{ route('alunos.show', $aluno) }}" class="icon-btn" title="Ver detalhes">
                             <i class="bi bi-eye"></i>
                         </a>
-                        <a href="{{ route('alunos.edit', $aluno) }}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{ route('alunos.edit', $aluno) }}" class="icon-btn" title="Editar">
                             <i class="bi bi-pencil"></i>
                         </a>
-                    </td>
-                </tr>
-                @empty
-                <tr>
-                    <td colspan="5" class="text-center text-muted py-5">
-                        Nenhum aluno encontrado.
-                        <a href="{{ route('alunos.create') }}">Cadastrar primeiro aluno</a>
-                    </td>
-                </tr>
-                @endforelse
-            </tbody>
-        </table>
-    </div>
+                    </div>
+                </td>
+            </tr>
+            @empty
+            <tr>
+                <td colspan="5">
+                    <div class="sp-empty">
+                        <i class="bi bi-people"></i>
+                        <div class="sp-empty-title">Nenhum aluno encontrado</div>
+                        <div class="sp-empty-sub">
+                            <a href="{{ route('alunos.create') }}">Cadastrar primeiro aluno</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            @endforelse
+        </tbody>
+    </table>
     @if($alunos->hasPages())
-    <div class="p-3 border-top" style="border-color:#1e2d47!important">
+    <div style="padding:14px 20px;border-top:1px solid var(--border)">
         {{ $alunos->links() }}
     </div>
     @endif

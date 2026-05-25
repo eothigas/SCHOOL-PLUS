@@ -28,7 +28,7 @@
                 <i class="bi bi-graph-up-arrow" style="color:var(--green)"></i>
             </div>
             <div class="stat-num">R$ {{ number_format($receita_mes, 2, ',', '.') }}</div>
-            <div class="stat-label">Receita — {{ now()->format('m/Y') }}</div>
+            <div class="stat-label">Receita - {{ now()->format('m/Y') }}</div>
             <div class="stat-trend trend-up">
                 <i class="bi bi-check-circle"></i> {{ $total_pago_mes }} pagamento(s)
             </div>
@@ -78,7 +78,7 @@
     <div class="col-lg-7">
         <div class="sp-card">
             <div style="font-size:14px;font-weight:700;margin-bottom:20px">
-                Receita {{ now()->year }} — Mês a Mês
+                Receita {{ now()->year }} - Mês a Mês
             </div>
             @php
                 $meses = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
@@ -125,7 +125,7 @@
                         <i class="bi bi-person-fill" style="color:var(--red)"></i>
                     </div>
                     <div>
-                        <div style="font-size:13px;font-weight:600">{{ $inad->matricula->aluno->usuario->nome ?? '—' }}</div>
+                        <div style="font-size:13px;font-weight:600">{{ $inad->matricula->aluno->usuario->nome ?? '-' }}</div>
                         <div style="font-size:11px;color:var(--text-soft)">{{ $inad->qtd }} cobrança(s) vencida(s)</div>
                     </div>
                 </div>
@@ -157,7 +157,7 @@
                 <tbody>
                     @forelse($ultimas_pagas as $cob)
                     <tr>
-                        <td style="font-weight:600">{{ $cob->matricula->aluno->usuario->nome ?? '—' }}</td>
+                        <td style="font-weight:600">{{ $cob->matricula->aluno->usuario->nome ?? '-' }}</td>
                         <td style="font-size:13px;color:var(--text-soft)">{{ $cob->descricao }}</td>
                         <td style="font-size:13px">{{ $cob->data_pagamento?->format('d/m/Y') }}</td>
                         <td><span class="badge-sp badge-green">{{ ucfirst(str_replace('_',' ',$cob->forma_pagamento)) }}</span></td>

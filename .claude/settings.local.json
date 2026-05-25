@@ -11,7 +11,11 @@
       "Bash(Test-Path *)",
       "Bash(git remote *)",
       "Bash(git push *)",
-      "PowerShell(cmdkey *)"
+      "PowerShell(cmdkey *)",
+      "Bash(xargs sed -i 's/class=\"card-sp/class=\"sp-card/g')",
+      "Bash(php -r ' *)",
+      "Bash(php *)",
+      "Bash(python3 -c ' *)"
     ]
   }
 }

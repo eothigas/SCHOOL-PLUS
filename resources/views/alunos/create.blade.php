@@ -9,8 +9,11 @@
 @endsection
 
 @section('content')
-<div class="d-flex align-items-center justify-content-between mb-4">
-    <h4 class="mb-0 fw-bold">Novo Aluno</h4>
+<div class="sp-page-hdr">
+    <div>
+        <h1 class="sp-page-hdr-title">Novo Aluno</h1>
+        <div class="sp-page-hdr-sub">Preencha os dados para cadastrar um aluno</div>
+    </div>
     <a href="{{ route('alunos.index') }}" class="btn btn-sm btn-outline-secondary">
         <i class="bi bi-arrow-left me-1"></i>Voltar
     </a>
@@ -22,10 +25,13 @@
 
         {{-- Dados de Acesso --}}
         <div class="col-12">
-            <div class="card-sp p-4">
-                <h6 class="fw-semibold mb-3 pb-2 border-bottom" style="border-color:#1e2d47!important">
-                    <i class="bi bi-person-lock me-2 text-primary"></i>Dados de Acesso
-                </h6>
+            <div class="sp-card" style="padding:24px">
+                <div class="sp-form-hdr">
+                    <div class="sp-form-hdr-icon" style="background:var(--purple-light)">
+                        <i class="bi bi-person-lock" style="color:var(--purple)"></i>
+                    </div>
+                    <span>Dados de Acesso</span>
+                </div>
                 <div class="row g-3">
                     <div class="col-md-4">
                         <label class="form-label text-muted small">Nome Completo *</label>
@@ -51,10 +57,13 @@
 
         {{-- Dados Acadêmicos --}}
         <div class="col-12">
-            <div class="card-sp p-4">
-                <h6 class="fw-semibold mb-3 pb-2 border-bottom" style="border-color:#1e2d47!important">
-                    <i class="bi bi-mortarboard me-2 text-success"></i>Dados Acadêmicos
-                </h6>
+            <div class="sp-card" style="padding:24px">
+                <div class="sp-form-hdr">
+                    <div class="sp-form-hdr-icon" style="background:var(--green-bg)">
+                        <i class="bi bi-mortarboard" style="color:var(--green)"></i>
+                    </div>
+                    <span>Dados Acadêmicos</span>
+                </div>
                 <div class="row g-3">
                     <div class="col-md-3">
                         <label class="form-label text-muted small">Nº de Matrícula *</label>
@@ -93,10 +102,13 @@
 
         {{-- Filiação --}}
         <div class="col-12">
-            <div class="card-sp p-4">
-                <h6 class="fw-semibold mb-3 pb-2 border-bottom" style="border-color:#1e2d47!important">
-                    <i class="bi bi-people me-2 text-warning"></i>Filiação & Endereço
-                </h6>
+            <div class="sp-card" style="padding:24px">
+                <div class="sp-form-hdr">
+                    <div class="sp-form-hdr-icon" style="background:var(--amber-bg)">
+                        <i class="bi bi-people" style="color:var(--amber)"></i>
+                    </div>
+                    <span>Filiação &amp; Endereço</span>
+                </div>
                 <div class="row g-3">
                     <div class="col-md-6">
                         <label class="form-label text-muted small">Nome do Pai</label>

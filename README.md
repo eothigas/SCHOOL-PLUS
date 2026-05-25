@@ -15,9 +15,9 @@ Sistema de gestão escolar multi-tenant construído em Laravel 11. Desenvolvido 
 - [Multi-Tenancy](#multi-tenancy)
 - [Autenticação e Perfis](#autenticação-e-perfis)
 - [Módulos do Sistema](#módulos-do-sistema)
-  - [Fase 1 — Acadêmico (MVP)](#fase-1--acadêmico-mvp)
-  - [Fase 2 — Diário de Classe](#fase-2--diário-de-classe)
-  - [Fase 3 — Financeiro](#fase-3--financeiro)
+  - [Fase 1 - Acadêmico (MVP)](#fase-1--acadêmico-mvp)
+  - [Fase 2 - Diário de Classe](#fase-2--diário-de-classe)
+  - [Fase 3 - Financeiro](#fase-3--financeiro)
 - [Rotas](#rotas)
 - [Modelos e Relacionamentos](#modelos-e-relacionamentos)
 - [Interface](#interface)
@@ -29,10 +29,10 @@ Sistema de gestão escolar multi-tenant construído em Laravel 11. Desenvolvido 
 
 O School+ é uma plataforma SaaS que centraliza:
 
-- **Gestão acadêmica** — alunos, turmas, matrículas, cursos e períodos letivos
-- **Diário de classe** — disciplinas, professores, aulas, frequência e notas
-- **Financeiro** — planos de pagamento, cobranças, baixa de pagamento e negociação de débitos
-- **Multi-tenancy** — cada escola (tenant) opera em total isolamento de dados
+- **Gestão acadêmica** - alunos, turmas, matrículas, cursos e períodos letivos
+- **Diário de classe** - disciplinas, professores, aulas, frequência e notas
+- **Financeiro** - planos de pagamento, cobranças, baixa de pagamento e negociação de débitos
+- **Multi-tenancy** - cada escola (tenant) opera em total isolamento de dados
 
 ---
 
@@ -122,7 +122,7 @@ tenants
 - Todas as tabelas usam `criado_em` / `atualizado_em` (não `created_at` / `updated_at`)
 - IDs como `unsignedInteger`, não `bigInteger`
 - Toda tabela de domínio tem `tenant_id` com FK para `tenants`
-- Exceção: `turma_disciplinas` — isolamento feito via relacionamento com `turmas`
+- Exceção: `turma_disciplinas` - isolamento feito via relacionamento com `turmas`
 
 ---
 
@@ -180,7 +180,7 @@ static::addGlobalScope('tenant', function (Builder $builder) {
 
 ### Exceção: `TurmaDisiplina`
 
-A tabela `turma_disciplinas` não possui `tenant_id`. O isolamento acontece via relacionamento — qualquer query que precise de segurança passa por `whereHas('turma', fn($q) => $q->where('tenant_id', session('tenant_id')))`.
+A tabela `turma_disciplinas` não possui `tenant_id`. O isolamento acontece via relacionamento - qualquer query que precise de segurança passa por `whereHas('turma', fn($q) => $q->where('tenant_id', session('tenant_id')))`.
 
 ---
 
@@ -225,7 +225,7 @@ Route::middleware('auth.session')->group(function () {
 
 ## Módulos do Sistema
 
-### Fase 1 — Acadêmico (MVP)
+### Fase 1 - Acadêmico (MVP)
 
 #### Alunos (`/alunos`)
 - Cadastro completo com dados pessoais, endereço e contato
@@ -252,7 +252,7 @@ Route::middleware('auth.session')->group(function () {
 
 ---
 
-### Fase 2 — Diário de Classe
+### Fase 2 - Diário de Classe
 
 #### Disciplinas (`/disciplinas`)
 - Cadastro de matérias com carga horária
@@ -281,7 +281,7 @@ Route::middleware('auth.session')->group(function () {
 
 **Frequência automática:** ao criar uma aula, o sistema gera registros de `frequencias` para todos os alunos com matrícula ativa na turma (presente por padrão). O professor só precisa desmarcar as faltas.
 
-**Notas:** usa `Nota::updateOrCreate(['avaliacao_id', 'matricula_id'], ['nota'])` — seguro para redigitar sem duplicatas.
+**Notas:** usa `Nota::updateOrCreate(['avaliacao_id', 'matricula_id'], ['nota'])` - seguro para redigitar sem duplicatas.
 
 #### Boletim (`/alunos/{aluno}/boletim`)
 - Organizado por turma → por disciplina
@@ -290,14 +290,14 @@ Route::middleware('auth.session')->group(function () {
 
 ---
 
-### Fase 3 — Financeiro
+### Fase 3 - Financeiro
 
 #### Dashboard Financeiro (`/financeiro`)
 - Receita do mês atual
 - Total a receber (cobranças abertas não vencidas)
 - Total vencido com quantidade de cobranças
 - Contador de inadimplentes
-- Gráfico de barras CSS puro — receita mês a mês no ano corrente
+- Gráfico de barras CSS puro - receita mês a mês no ano corrente
 - Lista top inadimplentes com valor total de dívida
 - Últimos 8 pagamentos registrados
 
@@ -317,8 +317,8 @@ Listagem com filtros por status, competência e busca por nome/descrição. Card
 |---|---|---|
 | `aberta` | `aberta` | Vencimento futuro |
 | `aberta` | `vencida` | Vencimento passado |
-| `paga` | `paga` | — |
-| `cancelada` | `cancelada` | — |
+| `paga` | `paga` | - |
+| `cancelada` | `cancelada` | - |
 | `negociada` | `negociada` | Substituída por negociação |
 
 **Valor corrigido** (calculado em `Cobranca::getValorCorrigidoAttribute`):
@@ -327,9 +327,9 @@ valor_corrigido = valor_original - desconto + multa + (juros_dia × dias_atraso)
 ```
 
 **Fluxos:**
-- `POST /cobrancas/{id}/pagar` — registra pagamento com forma, valor e data
-- `POST /cobrancas/{id}/cancelar` — cancela a cobrança
-- `GET /cobrancas/gerar` → `POST /cobrancas/gerar` — gera lote de mensalidades para uma matrícula, pulando automaticamente competências já existentes (sem duplicatas)
+- `POST /cobrancas/{id}/pagar` - registra pagamento com forma, valor e data
+- `POST /cobrancas/{id}/cancelar` - cancela a cobrança
+- `GET /cobrancas/gerar` → `POST /cobrancas/gerar` - gera lote de mensalidades para uma matrícula, pulando automaticamente competências já existentes (sem duplicatas)
 
 #### Negociações (`/negociacoes`)
 
@@ -366,7 +366,7 @@ GET    /alunos/{aluno}/edit            form edição
 PUT    /alunos/{aluno}                 update
 GET    /alunos/{aluno}/boletim         boletim do aluno
 
-# Cursos, Períodos — CRUD completo
+# Cursos, Períodos - CRUD completo
 GET/POST/PUT/DELETE  /cursos
 GET/POST/PUT/DELETE  /periodos
 
@@ -384,7 +384,7 @@ POST   /matriculas                     store
 GET    /matriculas/{matricula}         show
 PATCH  /matriculas/{matricula}/status  atualizar status
 
-# Disciplinas, Professores — CRUD completo
+# Disciplinas, Professores - CRUD completo
 GET/POST/PUT/DELETE  /disciplinas
 GET/POST/PUT/DELETE  /professores
 
@@ -448,7 +448,7 @@ Turma
   belongsTo → Curso, PeriodoLetivo
   hasMany   → TurmaDisiplina, Matricula
 
-TurmaDisiplina  [sem BelongsToTenant — sem tenant_id na tabela]
+TurmaDisiplina  [sem BelongsToTenant - sem tenant_id na tabela]
   belongsTo → Turma, Disciplina, Usuario (professor)
   hasMany   → Aula, Avaliacao
 
@@ -483,7 +483,7 @@ Negociacao
 
 ### Tema Visual
 
-Light purple — baseado em CSS custom properties:
+Light purple - baseado em CSS custom properties:
 
 | Variável | Valor | Uso |
 |---|---|---|
@@ -500,14 +500,14 @@ Light purple — baseado em CSS custom properties:
 
 ### Layout
 
-- **Body:** `padding: 12px; gap: 12px; display: flex` — sidebar + main lado a lado com bordas arredondadas flutuando
+- **Body:** `padding: 12px; gap: 12px; display: flex` - sidebar + main lado a lado com bordas arredondadas flutuando
 - **Sidebar:** `border-radius: 20px`, fundo `--purple`, colapsável
 - **Main wrapper:** `border-radius: 20px`, fundo branco, scrollável
 - **Sidebar colapsável:** estado em `localStorage('sbClosed')`, labels com `opacity: 0; max-width: 0` em modo fechado
 
 ### Tela de Login
 
-Glassmorphism — fundo lavanda (`#edeaf7`) com card central branco:
+Glassmorphism - fundo lavanda (`#edeaf7`) com card central branco:
 - Painel esquerdo: gradiente roxo com SVG ilustrado (girl in armchair)
 - Painel direito: formulário limpo com inputs estilizados e sombra suave
 
@@ -546,7 +546,7 @@ $professores = Usuario::withoutGlobalScope('tenant')
 abort_if($model->tenant_id !== session('tenant_id'), 403);
 ```
 
-### Computed Attributes — Model Cobranca
+### Computed Attributes - Model Cobranca
 
 ```php
 // Considera data de vencimento para cobranças com status 'aberta'
@@ -584,4 +584,4 @@ protected $dates = ['criado_em', 'atualizado_em'];
 
 ## Licença
 
-Projeto proprietário — todos os direitos reservados.
+Projeto proprietário - todos os direitos reservados.

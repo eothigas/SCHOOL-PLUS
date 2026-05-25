@@ -38,7 +38,7 @@
                             <option value="">Selecione uma matrícula...</option>
                             @foreach($matriculas as $mat)
                             <option value="{{ $mat->id }}" {{ old('matricula_id') == $mat->id ? 'selected' : '' }}>
-                                {{ $mat->aluno->usuario->nome }} — {{ $mat->turma->nome ?? '—' }}
+                                {{ $mat->aluno->usuario->nome }} - {{ $mat->turma->nome ?? '-' }}
                             </option>
                             @endforeach
                         </select>
@@ -53,7 +53,7 @@
                                     data-valor="{{ $plano->valor }}"
                                     data-dia="{{ $plano->dia_vencimento }}"
                                     {{ old('plano_id') == $plano->id ? 'selected' : '' }}>
-                                {{ $plano->nome }} — R$ {{ number_format($plano->valor, 2, ',', '.') }} / dia {{ $plano->dia_vencimento }}
+                                {{ $plano->nome }} - R$ {{ number_format($plano->valor, 2, ',', '.') }} / dia {{ $plano->dia_vencimento }}
                             </option>
                             @endforeach
                         </select>
@@ -62,8 +62,8 @@
                     <div id="planoInfo" style="display:none" class="col-12">
                         <div style="background:var(--purple-light);border-radius:12px;padding:14px 18px;font-size:13px;color:var(--purple)">
                             <strong>Plano selecionado:</strong>
-                            Valor R$ <span id="piValor">—</span> &nbsp;·&nbsp;
-                            Vencimento dia <span id="piDia">—</span> de cada mês
+                            Valor R$ <span id="piValor">-</span> &nbsp;·&nbsp;
+                            Vencimento dia <span id="piDia">-</span> de cada mês
                         </div>
                     </div>
 

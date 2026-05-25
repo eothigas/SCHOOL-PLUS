@@ -2,10 +2,10 @@
 @section('title', 'Planos de Pagamento')
 
 @section('content')
-<div class="d-flex align-items-center justify-content-between mb-4">
+<div class="sp-page-hdr">
     <div>
-        <h4 style="font-size:20px;font-weight:800;color:var(--text);margin-bottom:2px">Planos de Pagamento</h4>
-        <div style="font-size:13px;color:var(--text-soft)">Gerencie os planos de mensalidade e suas condições</div>
+        <h1 class="sp-page-hdr-title">Planos de Pagamento</h1>
+        <div class="sp-page-hdr-sub">Gerencie os planos de mensalidade e suas condições</div>
     </div>
     <a href="{{ route('planos.create') }}" class="btn btn-primary">
         <i class="bi bi-plus-lg me-1"></i>Novo Plano

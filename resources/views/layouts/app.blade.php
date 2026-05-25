@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'School+') — School+</title>
+    <title>@yield('title', 'School+') - School+</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
@@ -48,18 +48,24 @@
            SIDEBAR
         ════════════════════════════════════════ */
         .sidebar {
-            width: var(--sidebar-open);
+            width: var(--sidebar-closed);
             background: var(--purple);
             border-radius: 20px;
             display: flex;
             flex-direction: column;
-            padding: 20px 12px 16px;
+            padding: 16px 10px 16px;
             gap: 2px;
             flex-shrink: 0;
             z-index: 100;
             overflow: hidden;
             transition: width .3s cubic-bezier(.4,0,.2,1);
             box-shadow: 0 8px 32px rgba(124,58,237,.25);
+            overflow-y: auto;
+        }
+        .sidebar:hover {
+            width: var(--sidebar-open);
+            padding-left: 12px;
+            padding-right: 12px;
         }
         .sidebar::-webkit-scrollbar { width: 0; }
 
@@ -72,10 +78,11 @@
             flex-shrink: 0;
             overflow: hidden;
         }
+
         .sidebar-logo {
-            width: 44px; height: 44px;
+            width: 40px; height: 40px;
             background: rgba(255,255,255,.2);
-            border-radius: 14px;
+            border-radius: 12px;
             display: flex; align-items: center; justify-content: center;
             text-decoration: none;
             flex-shrink: 0;
@@ -153,50 +160,36 @@
             max-width: 160px;
         }
 
-        /* toggle button at bottom */
-        .sidebar-toggle {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 11px 12px;
-            border-radius: 12px;
-            background: none;
-            border: none;
-            color: rgba(255,255,255,.55);
-            font-size: 13.5px;
-            cursor: pointer;
-            width: 100%;
-            overflow: hidden;
-            white-space: nowrap;
-            flex-shrink: 0;
-            transition: background .15s, color .15s;
-        }
-        .sidebar-toggle:hover { background: rgba(255,255,255,.12); color: #fff; }
-        .sidebar-toggle i {
-            font-size: 16px;
-            flex-shrink: 0;
-            width: 20px;
-            text-align: center;
-            transition: transform .35s cubic-bezier(.4,0,.2,1);
-        }
 
         .sidebar-spacer { flex: 1; min-height: 8px; }
 
-        /* ── COLLAPSED STATE ─────────────────────── */
-        body.sb-closed .sidebar { width: var(--sidebar-closed); }
+        /* ── COLLAPSED STATE (default, expands on hover) ────── */
+        .nav-label,
+        .sidebar-brand { opacity: 0; max-width: 0; overflow: hidden; }
 
-        body.sb-closed .nav-label,
-        body.sb-closed .sidebar-brand,
-        body.sb-closed .nav-section { opacity: 0; max-width: 0; }
+        .sidebar:hover .nav-label,
+        .sidebar:hover .sidebar-brand { opacity: 1; max-width: 160px; }
 
-        body.sb-closed .nav-section { padding-top: 6px; padding-bottom: 2px; }
+        /* nav-section: colapsa completamente quando não hover */
+        .nav-section {
+            max-height: 0;
+            padding-top: 0; padding-bottom: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height .25s ease, padding .25s ease, opacity .2s ease;
+        }
+        .sidebar:hover .nav-section {
+            max-height: 40px;
+            padding-top: 14px; padding-bottom: 4px;
+            opacity: 1;
+        }
 
-        body.sb-closed .nav-item,
-        body.sb-closed .sidebar-toggle { justify-content: center; padding-left: 0; padding-right: 0; }
+        .nav-item { justify-content: center; padding-left: 0; padding-right: 0; }
+        .sidebar:hover .nav-item { justify-content: flex-start; padding-left: 12px; padding-right: 12px; }
 
-        body.sb-closed .sidebar-header { justify-content: center; }
+        .sidebar-header { justify-content: center; }
+        .sidebar:hover .sidebar-header { justify-content: flex-start; }
 
-        body.sb-closed .sidebar-toggle i { transform: rotate(180deg); }
 
         /* ════════════════════════════════════════
            MAIN WRAPPER
@@ -297,22 +290,18 @@
             overflow-y: auto;
             padding: 24px;
         }
-        .page-content::-webkit-scrollbar { width: 5px; }
-        .page-content::-webkit-scrollbar-track { background: transparent; }
-        .page-content::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+        .page-content::-webkit-scrollbar { width: 0; }
 
         /* ── RIGHT PANEL ────────────────────────── */
         .right-panel {
-            width: var(--right-w);
             background: var(--surface2);
             border-left: 1px solid var(--border);
             overflow-y: auto;
             padding: 24px 20px;
             flex-shrink: 0;
-            border-radius: 0 20px 20px 0;
+            border-radius: 0 0 20px 0;
         }
-        .right-panel::-webkit-scrollbar { width: 4px; }
-        .right-panel::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+        .right-panel::-webkit-scrollbar { width: 0; }
 
         /* ── PAGE HEADER ────────────────────────── */
         .welcome-banner {
@@ -476,11 +465,92 @@
             .main-wrapper { border-radius: 0; }
         }
     </style>
+
+    {{-- ── GLOBAL COMPONENT UTILITIES ─────────────────────────────── --}}
+    <style>
+    /* Icon-only action button */
+    .icon-btn {
+        width:32px;height:32px;border-radius:9px;
+        border:1.5px solid var(--border);
+        background:var(--surface);
+        display:inline-flex;align-items:center;justify-content:center;
+        cursor:pointer;font-size:13px;color:var(--text-soft);
+        transition:all .12s;text-decoration:none;vertical-align:middle;
+        flex-shrink:0;
+    }
+    .icon-btn:hover           { background:var(--purple-light);color:var(--purple);border-color:var(--purple-mid); }
+    .icon-btn.danger:hover    { background:var(--red-bg);color:var(--red);border-color:#fca5a5; }
+    .icon-btn.success:hover   { background:var(--green-bg);color:var(--green);border-color:#86efac; }
+
+    /* Avatar circle for table rows */
+    .idx-avatar {
+        width:38px;height:38px;border-radius:11px;
+        background:var(--purple-light);color:var(--purple);
+        display:flex;align-items:center;justify-content:center;
+        font-size:13px;font-weight:800;flex-shrink:0;letter-spacing:-.01em;
+    }
+    .idx-avatar.av-green  { background:var(--green-bg); color:var(--green); }
+    .idx-avatar.av-amber  { background:var(--amber-bg); color:var(--amber); }
+    .idx-avatar.av-blue   { background:var(--blue-bg);  color:var(--blue);  }
+    .idx-avatar.av-red    { background:var(--red-bg);   color:var(--red);   }
+
+    /* Form section header */
+    .sp-form-hdr {
+        display:flex;align-items:center;gap:10px;
+        padding-bottom:14px;border-bottom:1.5px solid var(--border);margin-bottom:20px;
+    }
+    .sp-form-hdr-icon {
+        width:32px;height:32px;border-radius:9px;
+        display:flex;align-items:center;justify-content:center;
+        font-size:15px;flex-shrink:0;
+    }
+    .sp-form-hdr span { font-size:14px;font-weight:700;color:var(--text); }
+
+    /* Page title + action row */
+    .sp-page-hdr {
+        display:flex;align-items:center;justify-content:space-between;
+        margin-bottom:24px;gap:12px;
+    }
+    .sp-page-hdr-title  { font-size:22px;font-weight:800;color:var(--text);margin:0; }
+    .sp-page-hdr-sub    { font-size:13px;color:var(--text-soft);margin-top:3px; }
+
+    /* Search bar */
+    .sp-search { position:relative; }
+    .sp-search > i,
+    .sp-search .sp-search-icon { position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text-soft);font-size:13px;pointer-events:none;z-index:1; }
+    .sp-search input,
+    .sp-search .sp-search-input { padding-left:36px!important; }
+    .sp-search-clear {
+        position:absolute;right:10px;top:50%;transform:translateY(-50%);
+        display:flex;align-items:center;justify-content:center;
+        width:22px;height:22px;border-radius:6px;
+        color:var(--text-soft);font-size:11px;text-decoration:none;
+        transition:background .15s,color .15s;
+    }
+    .sp-search-clear:hover { background:var(--red-bg);color:var(--red); }
+
+    /* Empty state */
+    .sp-empty { text-align:center;padding:52px 20px;color:var(--text-soft); }
+    .sp-empty i { font-size:38px;display:block;opacity:.28;margin-bottom:12px; }
+    .sp-empty-title { font-size:14px;font-weight:700;margin-bottom:4px; }
+    .sp-empty-sub   { font-size:13px; }
+
+    /* Status badges for matricula/turma */
+    .badge-status-ativa, .badge-status-ativo, .badge-status-aberta         { background:var(--green-bg); color:var(--green); }
+    .badge-status-inativa,.badge-status-inativo,.badge-status-encerrada,
+    .badge-status-encerrado,.badge-status-cancelada,.badge-status-cancelado { background:#f3f4f6;color:#6b7280; }
+    .badge-status-trancada,.badge-status-planejamento                       { background:var(--amber-bg);color:var(--amber); }
+    .badge-status-em_andamento                                              { background:var(--blue-bg);color:var(--blue); }
+    .badge-status-concluida,.badge-status-concluido                        { background:var(--purple-light);color:var(--purple); }
+    </style>
+
     @stack('styles')
 </head>
 <body id="appBody">
+@include('partials._loading')
 
 <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
 
 <!-- Sidebar -->
 <nav class="sidebar" id="sidebar">
@@ -502,6 +572,18 @@
         <i class="bi bi-house-fill"></i>
         <span class="nav-label">Dashboard</span>
     </a>
+
+    @if(session('usuario_perfil') === 'professor')
+
+    <div class="nav-section"><span class="nav-label">Meu Diário</span></div>
+
+    <a href="{{ route('professor.minhas-turmas') }}"
+       class="nav-item {{ request()->routeIs('professor.minhas-turmas') ? 'active' : '' }}">
+        <i class="bi bi-journal-text"></i>
+        <span class="nav-label">Minhas Turmas</span>
+    </a>
+
+    @endif
 
     @if(in_array(session('usuario_perfil'), ['admin','secretaria','superadmin']))
 
@@ -546,6 +628,14 @@
         <span class="nav-label">Professores</span>
     </a>
 
+    <div class="nav-section"><span class="nav-label">Comunicação</span></div>
+
+    <a href="{{ route('comunicados.index') }}"
+       class="nav-item {{ request()->routeIs('comunicados.*') ? 'active' : '' }}">
+        <i class="bi bi-megaphone-fill"></i>
+        <span class="nav-label">Comunicados</span>
+    </a>
+
     <div class="nav-section"><span class="nav-label">Financeiro</span></div>
 
     <a href="{{ route('financeiro.index') }}"
@@ -565,44 +655,12 @@
     </a>
     <a href="{{ route('negociacoes.index') }}"
        class="nav-item {{ request()->routeIs('negociacoes.*') ? 'active' : '' }}">
-        <i class="bi bi-handshake-fill"></i>
+        <i class="bi bi-cash-stack"></i>
         <span class="nav-label">Negociações</span>
     </a>
 
     @endif
 
-    <div class="sidebar-spacer"></div>
-
-    <!-- Toggle open/close -->
-    <button class="sidebar-toggle" onclick="toggleSidebar()" title="Expandir / Fechar">
-        <i class="bi bi-chevron-left" id="toggleIcon"></i>
-        <span class="nav-label">Fechar menu</span>
-    </button>
-
-    <!-- User / logout -->
-    <div class="dropdown dropend">
-        <a href="#" class="nav-item" data-bs-toggle="dropdown">
-            <i class="bi bi-person-circle"></i>
-            <span class="nav-label">{{ explode(' ', session('usuario_nome'))[0] }}</span>
-        </a>
-        <ul class="dropdown-menu ms-2" style="min-width:210px">
-            <li>
-                <span class="dropdown-item-text" style="font-size:12px;padding:6px 14px;color:var(--text-soft)">
-                    {{ session('usuario_nome') }}<br>
-                    <small>{{ session('usuario_perfil') }}</small>
-                </span>
-            </li>
-            <li><hr class="dropdown-divider" style="border-color:var(--border)"></li>
-            <li>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit" class="dropdown-item text-danger">
-                        <i class="bi bi-box-arrow-right me-2"></i>Sair do sistema
-                    </button>
-                </form>
-            </li>
-        </ul>
-    </div>
 </nav>
 
 <!-- Main -->
@@ -624,14 +682,33 @@
             <a href="#" class="topbar-btn">
                 <i class="bi bi-bell"></i>
             </a>
-            <div class="topbar-user">
-                <div class="topbar-user-avatar">
-                    <i class="bi bi-person-fill"></i>
+            <div class="dropdown">
+                <div class="topbar-user" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="topbar-user-avatar">
+                        <i class="bi bi-person-fill"></i>
+                    </div>
+                    <div class="d-none d-sm-block">
+                        <div class="topbar-user-name">{{ explode(' ', session('usuario_nome'))[0] }}</div>
+                        <div class="topbar-user-role">{{ ucfirst(session('usuario_perfil')) }}</div>
+                    </div>
                 </div>
-                <div class="d-none d-sm-block">
-                    <div class="topbar-user-name">{{ explode(' ', session('usuario_nome'))[0] }}</div>
-                    <div class="topbar-user-role">{{ ucfirst(session('usuario_perfil')) }}</div>
-                </div>
+                <ul class="dropdown-menu dropdown-menu-end mt-2" style="min-width:210px">
+                    <li>
+                        <span class="dropdown-item-text" style="font-size:12px;padding:6px 14px;color:var(--text-soft)">
+                            {{ session('usuario_nome') }}<br>
+                            <small>{{ session('usuario_perfil') }}</small>
+                        </span>
+                    </li>
+                    <li><hr class="dropdown-divider" style="border-color:var(--border)"></li>
+                    <li>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="dropdown-item text-danger">
+                                <i class="bi bi-box-arrow-right me-2"></i>Sair do sistema
+                            </button>
+                        </form>
+                    </li>
+                </ul>
             </div>
         </div>
     </header>
@@ -676,16 +753,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    // Restore sidebar state
-    const body = document.getElementById('appBody');
-    if (localStorage.getItem('sbClosed') === '1') body.classList.add('sb-closed');
-
-    function toggleSidebar() {
-        body.classList.toggle('sb-closed');
-        localStorage.setItem('sbClosed', body.classList.contains('sb-closed') ? '1' : '0');
-    }
-
-    // Mobile overlay
+    // Mobile overlay only
     function openSidebar() {
         document.getElementById('sidebar').classList.add('show');
         document.getElementById('sidebarOverlay').classList.add('show');

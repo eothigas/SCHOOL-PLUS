@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login — School+</title>
+    <title>Login - School+</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -426,6 +426,31 @@ function togglePwd() {
     input.type  = show ? 'text' : 'password';
     icon.className = show ? 'bi bi-eye' : 'bi bi-eye-slash';
 }
+</script>
+<style>
+#sp-bar{position:fixed;top:0;left:0;right:0;height:3px;z-index:99999;border-radius:0 2px 2px 0;transform-origin:left;transform:scaleX(0);opacity:0;pointer-events:none;background:linear-gradient(90deg,#4c1d95,#7c3aed,#4c1d95);background-size:200% 100%;box-shadow:0 0 10px rgba(124,58,237,.5);}
+#sp-bar.sp-active{opacity:1;animation:sp-bar-s 1.1s ease-in-out infinite alternate,sp-bar-sh 1.1s ease-in-out infinite;}
+#sp-bar.sp-done{animation:none;transform:scaleX(1);transition:transform .12s,opacity .25s .12s;opacity:0;}
+@keyframes sp-bar-s{from{transform:scaleX(.15)}to{transform:scaleX(.82)}}
+@keyframes sp-bar-sh{0%{background-position:200% 0}100%{background-position:-200% 0}}
+@keyframes sp-spin{to{transform:rotate(360deg)}}
+.sp-spin{display:inline-block;width:16px;height:16px;border:2.5px solid currentColor;border-right-color:transparent;border-radius:50%;animation:sp-spin .65s linear infinite;vertical-align:middle;}
+</style>
+<div id="sp-bar"></div>
+<script>
+(function(){
+    const bar=document.getElementById('sp-bar');
+    let t;
+    function start(){bar.classList.remove('sp-done');bar.classList.add('sp-active');}
+    function stop(){bar.classList.remove('sp-active');bar.classList.add('sp-done');t=setTimeout(()=>{bar.classList.remove('sp-done');bar.style.transform='scaleX(0)'},450);}
+    document.addEventListener('submit',function(e){
+        start();
+        const btn=e.target.querySelector('[type="submit"]');
+        if(btn&&!btn.disabled){btn.disabled=true;btn.innerHTML='<span class="sp-spin" style="border-color:rgba(255,255,255,.3);border-top-color:#fff;width:14px;height:14px;border-width:2px"></span><span style="margin-left:8px">Entrando...</span>';}
+    });
+    window.addEventListener('load',stop);
+    window.addEventListener('pageshow',function(e){if(e.persisted)stop();});
+})();
 </script>
 </body>
 </html>

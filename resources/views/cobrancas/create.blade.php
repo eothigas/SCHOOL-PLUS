@@ -26,7 +26,7 @@
                             <option value="">Selecione uma matrícula...</option>
                             @foreach($matriculas as $mat)
                             <option value="{{ $mat->id }}" {{ old('matricula_id') == $mat->id ? 'selected' : '' }}>
-                                {{ $mat->aluno->usuario->nome }} — {{ $mat->turma->nome ?? '—' }}
+                                {{ $mat->aluno->usuario->nome }} - {{ $mat->turma->nome ?? '-' }}
                             </option>
                             @endforeach
                         </select>

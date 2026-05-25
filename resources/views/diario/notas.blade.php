@@ -5,7 +5,7 @@
 <div class="d-flex align-items-start justify-content-between mb-4">
     <div>
         <h4 style="font-size:20px;font-weight:800;color:var(--text);margin-bottom:4px">
-            Notas — {{ $avaliacao->nome }}
+            Notas - {{ $avaliacao->nome }}
         </h4>
         <div style="font-size:13px;color:var(--text-soft)">
             {{ $td->disciplina->nome }} &middot; {{ $td->turma->nome }}
@@ -30,7 +30,7 @@
         <div class="col-4">
             <div style="font-size:11px;color:var(--purple);font-weight:700;text-transform:uppercase;letter-spacing:.05em">Data</div>
             <div style="font-size:16px;font-weight:800;color:var(--purple)">
-                {{ $avaliacao->data_aplicacao ? $avaliacao->data_aplicacao->format('d/m/Y') : '—' }}
+                {{ $avaliacao->data_aplicacao ? $avaliacao->data_aplicacao->format('d/m/Y') : '-' }}
             </div>
         </div>
     </div>
@@ -57,13 +57,13 @@
                 @foreach($matriculas as $mat)
                 @php $nota_val = $notas_existentes[$mat->id] ?? ''; @endphp
                 <tr>
-                    <td style="font-weight:600">{{ $mat->aluno->usuario->nome ?? '—' }}</td>
+                    <td style="font-weight:600">{{ $mat->aluno->usuario->nome ?? '-' }}</td>
                     <td>
                         <input type="number" name="notas[{{ $mat->id }}]"
                                class="form-control nota-input" style="width:120px"
                                value="{{ $nota_val }}"
                                min="0" max="{{ $avaliacao->nota_maxima }}" step="0.1"
-                               placeholder="—">
+                               placeholder="-">
                     </td>
                     <td>
                         <input type="text" name="obs[{{ $mat->id }}]"

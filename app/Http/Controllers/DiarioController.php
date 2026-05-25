@@ -14,9 +14,15 @@ class DiarioController extends Controller
 {
     private function findTd(int $id): TurmaDisiplina
     {
-        return TurmaDisiplina::whereHas('turma', fn($q) => $q->where('tenant_id', session('tenant_id')))
-            ->with(['turma.curso', 'disciplina', 'professor'])
-            ->findOrFail($id);
+        $q = TurmaDisiplina::whereHas('turma', fn($q) => $q->where('tenant_id', session('tenant_id')))
+            ->with(['turma.curso', 'disciplina', 'professor']);
+
+        // Professor só acessa suas próprias disciplinas/turmas
+        if (session('usuario_perfil') === 'professor') {
+            $q->where('professor_id', session('usuario_id'));
+        }
+
+        return $q->findOrFail($id);
     }
 
     public function index(int $td)

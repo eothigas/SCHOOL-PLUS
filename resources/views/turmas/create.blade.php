@@ -7,8 +7,11 @@
 @endsection
 
 @section('content')
-<div class="d-flex align-items-center justify-content-between mb-4">
-    <h4 class="mb-0 fw-bold">Nova Turma</h4>
+<div class="sp-page-hdr">
+    <div>
+        <h1 class="sp-page-hdr-title">Nova Turma</h1>
+        <div class="sp-page-hdr-sub">Preencha os dados para criar uma turma</div>
+    </div>
     <a href="{{ route('turmas.index') }}" class="btn btn-sm btn-outline-secondary">
         <i class="bi bi-arrow-left me-1"></i>Voltar
     </a>
@@ -16,7 +19,7 @@
 
 <form method="POST" action="{{ route('turmas.store') }}">
     @csrf
-    <div class="card-sp p-4">
+    <div class="sp-card" style="padding:24px">
         <div class="row g-3">
             <div class="col-md-4">
                 <label class="form-label text-muted small">Curso *</label>

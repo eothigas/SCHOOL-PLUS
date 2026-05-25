@@ -2,10 +2,10 @@
 @section('title', 'Editar Disciplina')
 
 @section('content')
-<div class="d-flex align-items-center justify-content-between mb-4">
+<div class="sp-page-hdr">
     <div>
-        <h4 style="font-size:20px;font-weight:800;color:var(--text);margin-bottom:2px">Editar: {{ $disciplina->nome }}</h4>
-        <div style="font-size:13px;color:var(--text-soft)">Atualize os dados da disciplina</div>
+        <h1 class="sp-page-hdr-title">Editar Disciplina</h1>
+        <div class="sp-page-hdr-sub">{{ $disciplina->nome }}</div>
     </div>
     <a href="{{ route('disciplinas.index') }}" class="btn btn-outline-secondary">
         <i class="bi bi-arrow-left me-1"></i>Voltar

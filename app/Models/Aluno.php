@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\BelongsToTenant;
+use App\Models\DocumentoAluno;
 use Illuminate\Database\Eloquent\Model;
 
 class Aluno extends Model
@@ -41,14 +42,19 @@ class Aluno extends Model
         return $this->hasMany(Responsavel::class);
     }
 
+    public function documentos()
+    {
+        return $this->hasMany(DocumentoAluno::class)->orderByDesc('criado_em');
+    }
+
     // Nome do aluno via relação com usuario
     public function getNomeAttribute(): string
     {
-        return $this->usuario?->nome ?? '—';
+        return $this->usuario?->nome ?? '-';
     }
 
     public function getEmailAttribute(): string
     {
-        return $this->usuario?->email ?? '—';
+        return $this->usuario?->email ?? '-';
     }
 }

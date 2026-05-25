@@ -7,8 +7,11 @@
 @endsection
 
 @section('content')
-<div class="d-flex align-items-center justify-content-between mb-4">
-    <h4 class="mb-0 fw-bold">Novo Período Letivo</h4>
+<div class="sp-page-hdr">
+    <div>
+        <h1 class="sp-page-hdr-title">Novo Período Letivo</h1>
+        <div class="sp-page-hdr-sub">Defina datas e status do período</div>
+    </div>
     <a href="{{ route('periodos.index') }}" class="btn btn-sm btn-outline-secondary">
         <i class="bi bi-arrow-left me-1"></i>Voltar
     </a>
@@ -16,7 +19,7 @@
 
 <form method="POST" action="{{ route('periodos.store') }}">
     @csrf
-    <div class="card-sp p-4">
+    <div class="sp-card" style="padding:24px">
         <div class="row g-3">
             <div class="col-md-4">
                 <label class="form-label text-muted small">Nome do Período *</label>

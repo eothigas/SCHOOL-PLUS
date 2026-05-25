@@ -2,10 +2,10 @@
 @section('title', 'Cobranças')
 
 @section('content')
-<div class="d-flex align-items-center justify-content-between mb-4">
+<div class="sp-page-hdr">
     <div>
-        <h4 style="font-size:20px;font-weight:800;color:var(--text);margin-bottom:2px">Cobranças</h4>
-        <div style="font-size:13px;color:var(--text-soft)">Gerencie todas as cobranças do sistema</div>
+        <h1 class="sp-page-hdr-title">Cobranças</h1>
+        <div class="sp-page-hdr-sub">Gerencie todas as cobranças do sistema</div>
     </div>
     <div class="d-flex gap-2">
         <a href="{{ route('cobrancas.gerar') }}" class="btn btn-outline-primary">
@@ -94,7 +94,7 @@
                 };
             @endphp
             <tr>
-                <td style="font-weight:600">{{ $cob->matricula->aluno->usuario->nome ?? '—' }}</td>
+                <td style="font-weight:600">{{ $cob->matricula->aluno->usuario->nome ?? '-' }}</td>
                 <td style="font-size:13px;color:var(--text-soft);max-width:200px">{{ $cob->descricao }}</td>
                 <td style="font-size:13px;color:{{ $sr==='vencida' ? 'var(--red)' : 'var(--text)' }};font-weight:{{ $sr==='vencida' ? '700' : '400' }}">
                     {{ $cob->data_vencimento->format('d/m/Y') }}

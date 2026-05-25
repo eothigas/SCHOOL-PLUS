@@ -38,16 +38,16 @@
             <div class="section-label">Dados da Cobrança</div>
             <dl class="row mb-0" style="font-size:14px;row-gap:8px">
                 <dt class="col-5" style="color:var(--text-soft);font-weight:500">Aluno</dt>
-                <dd class="col-7 fw-semibold">{{ $cobranca->matricula->aluno->usuario->nome ?? '—' }}</dd>
+                <dd class="col-7 fw-semibold">{{ $cobranca->matricula->aluno->usuario->nome ?? '-' }}</dd>
 
                 <dt class="col-5" style="color:var(--text-soft);font-weight:500">Plano</dt>
-                <dd class="col-7">{{ $cobranca->plano?->nome ?? '—' }}</dd>
+                <dd class="col-7">{{ $cobranca->plano?->nome ?? '-' }}</dd>
 
                 <dt class="col-5" style="color:var(--text-soft);font-weight:500">Vencimento</dt>
                 <dd class="col-7 {{ $sr==='vencida' ? 'text-danger fw-bold' : '' }}">{{ $cobranca->data_vencimento->format('d/m/Y') }}</dd>
 
                 <dt class="col-5" style="color:var(--text-soft);font-weight:500">Competência</dt>
-                <dd class="col-7">{{ $cobranca->competencia ?? '—' }}</dd>
+                <dd class="col-7">{{ $cobranca->competencia ?? '-' }}</dd>
 
                 <dt class="col-5" style="color:var(--text-soft);font-weight:500">Valor Original</dt>
                 <dd class="col-7 fw-bold">R$ {{ number_format($cobranca->valor_original, 2, ',', '.') }}</dd>

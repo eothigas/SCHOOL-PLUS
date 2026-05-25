@@ -7,8 +7,11 @@
 @endsection
 
 @section('content')
-<div class="d-flex align-items-center justify-content-between mb-4">
-    <h4 class="mb-0 fw-bold">Nova Matrícula</h4>
+<div class="sp-page-hdr">
+    <div>
+        <h1 class="sp-page-hdr-title">Nova Matrícula</h1>
+        <div class="sp-page-hdr-sub">Vincule um aluno a uma turma e período</div>
+    </div>
     <a href="{{ route('matriculas.index') }}" class="btn btn-sm btn-outline-secondary">
         <i class="bi bi-arrow-left me-1"></i>Voltar
     </a>
@@ -16,7 +19,7 @@
 
 <form method="POST" action="{{ route('matriculas.store') }}">
     @csrf
-    <div class="card-sp p-4">
+    <div class="sp-card" style="padding:24px">
         <div class="row g-3">
             <div class="col-md-4">
                 <label class="form-label text-muted small">Aluno *</label>
@@ -25,7 +28,7 @@
                     @foreach($alunos as $aluno)
                     <option value="{{ $aluno->id }}"
                             @selected(old('aluno_id', $aluno_selecionado?->id) == $aluno->id)>
-                        {{ $aluno->usuario->nome ?? '—' }} ({{ $aluno->matricula }})
+                        {{ $aluno->usuario->nome ?? '-' }} ({{ $aluno->matricula }})
                     </option>
                     @endforeach
                 </select>
@@ -37,7 +40,7 @@
                     <option value="">Selecionar turma...</option>
                     @foreach($turmas as $turma)
                     <option value="{{ $turma->id }}" @selected(old('turma_id') == $turma->id)>
-                        {{ $turma->nome }} — {{ $turma->curso->nome ?? '' }}
+                        {{ $turma->nome }} - {{ $turma->curso->nome ?? '' }}
                     </option>
                     @endforeach
                 </select>

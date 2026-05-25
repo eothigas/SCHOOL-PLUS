@@ -2,10 +2,10 @@
 @section('title', 'Editar Plano')
 
 @section('content')
-<div class="d-flex align-items-center justify-content-between mb-4">
+<div class="sp-page-hdr">
     <div>
-        <h4 style="font-size:20px;font-weight:800;color:var(--text);margin-bottom:4px">Editar Plano</h4>
-        <div style="font-size:13px;color:var(--text-soft)">{{ $plano->nome }}</div>
+        <h1 class="sp-page-hdr-title">Editar Plano</h1>
+        <div class="sp-page-hdr-sub">{{ $plano->nome }}</div>
     </div>
     <a href="{{ route('planos.index') }}" class="btn btn-outline-secondary">
         <i class="bi bi-arrow-left me-1"></i>Voltar

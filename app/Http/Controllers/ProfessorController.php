@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TurmaDisiplina;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 
@@ -50,6 +51,18 @@ class ProfessorController extends Controller
     public function show(Usuario $usuario)
     {
         return redirect()->route('professores.edit', $usuario);
+    }
+
+    public function minhasTurmas()
+    {
+        $turmaDiscs = TurmaDisiplina::with(['turma.curso', 'turma.periodo', 'disciplina'])
+            ->withCount('aulas')
+            ->whereHas('turma', fn($q) => $q->where('tenant_id', session('tenant_id')))
+            ->where('professor_id', session('usuario_id'))
+            ->get()
+            ->groupBy('turma_id');
+
+        return view('professores.minhas-turmas', compact('turmaDiscs'));
     }
 
     public function edit(Usuario $usuario)

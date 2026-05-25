@@ -86,7 +86,7 @@ class NegociacaoController extends Controller
                 $venc = $inicio->copy()->addMonths($i);
                 Cobranca::create([
                     'matricula_id'    => $request->matricula_id,
-                    'descricao'       => "Negociação #{$neg->id} — Parcela " . ($i + 1) . "/{$request->qtd_parcelas}",
+                    'descricao'       => "Negociação #{$neg->id} - Parcela " . ($i + 1) . "/{$request->qtd_parcelas}",
                     'valor_original'  => $valor_parcela,
                     'valor_desconto'  => 0,
                     'valor_acrescimo' => 0,

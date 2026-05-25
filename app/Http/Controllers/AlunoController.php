@@ -98,7 +98,7 @@ class AlunoController extends Controller
 
     public function show(Aluno $aluno)
     {
-        $aluno->load('usuario', 'matriculas.turma.curso', 'matriculas.periodo', 'responsaveis');
+        $aluno->load('usuario', 'matriculas.turma.curso', 'matriculas.periodo', 'responsaveis', 'documentos');
 
         return view('alunos.show', compact('aluno'));
     }

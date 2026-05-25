@@ -145,7 +145,7 @@ class CobrancaController extends Controller
                 Cobranca::create([
                     'matricula_id'    => $request->matricula_id,
                     'plano_id'        => $plano->id,
-                    'descricao'       => $plano->nome . ' — ' . $venc->format('m/Y'),
+                    'descricao'       => $plano->nome . ' - ' . $venc->format('m/Y'),
                     'valor_original'  => $plano->valor,
                     'valor_desconto'  => $plano->valor * $plano->desconto_pct / 100,
                     'valor_acrescimo' => 0,

@@ -8,8 +8,11 @@
 @endsection
 
 @section('content')
-<div class="d-flex align-items-center justify-content-between mb-4">
-    <h4 class="mb-0 fw-bold">Editar: {{ $aluno->usuario->nome ?? '—' }}</h4>
+<div class="sp-page-hdr">
+    <div>
+        <h1 class="sp-page-hdr-title">Editar Aluno</h1>
+        <div class="sp-page-hdr-sub">{{ $aluno->usuario->nome ?? '-' }}</div>
+    </div>
     <a href="{{ route('alunos.show', $aluno) }}" class="btn btn-sm btn-outline-secondary">
         <i class="bi bi-arrow-left me-1"></i>Voltar
     </a>
@@ -20,10 +23,13 @@
     <div class="row g-3">
 
         <div class="col-12">
-            <div class="card-sp p-4">
-                <h6 class="fw-semibold mb-3 pb-2 border-bottom" style="border-color:#1e2d47!important">
-                    Dados Pessoais
-                </h6>
+            <div class="sp-card" style="padding:24px">
+                <div class="sp-form-hdr">
+                    <div class="sp-form-hdr-icon" style="background:var(--purple-light)">
+                        <i class="bi bi-person" style="color:var(--purple)"></i>
+                    </div>
+                    <span>Dados Pessoais</span>
+                </div>
                 <div class="row g-3">
                     <div class="col-md-4">
                         <label class="form-label text-muted small">Nome Completo *</label>

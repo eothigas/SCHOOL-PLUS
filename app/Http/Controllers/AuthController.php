@@ -29,7 +29,7 @@ class AuthController extends Controller
             'password.min'      => 'Senha deve ter no mínimo 6 caracteres.',
         ]);
 
-        // Find user by email (without tenant scope — login is cross-tenant)
+        // Find user by email (without tenant scope - login is cross-tenant)
         $usuario = Usuario::withoutGlobalScope('tenant')
             ->where('email', $request->email)
             ->where('status', 1)

@@ -5,7 +5,7 @@
 <div class="d-flex align-items-center justify-content-between mb-4">
     <div>
         <h4 style="font-size:20px;font-weight:800;color:var(--text);margin-bottom:2px">
-            Diário — {{ $turma->nome }}
+            Diário - {{ $turma->nome }}
         </h4>
         <div style="font-size:13px;color:var(--text-soft)">
             {{ $turma->curso->nome ?? '' }} &middot; {{ ucfirst($turma->turno) }}

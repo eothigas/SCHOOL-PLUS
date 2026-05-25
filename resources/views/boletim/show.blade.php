@@ -5,7 +5,7 @@
 <div class="d-flex align-items-center justify-content-between mb-4">
     <div>
         <h4 style="font-size:20px;font-weight:800;color:var(--text);margin-bottom:4px">
-            Boletim — {{ $aluno->usuario->nome ?? '—' }}
+            Boletim - {{ $aluno->usuario->nome ?? '-' }}
         </h4>
         <div style="font-size:13px;color:var(--text-soft)">
             Desempenho acadêmico completo
@@ -80,7 +80,7 @@
                     <div style="font-size:20px;font-weight:900;color:{{ $cor }};line-height:1">{{ $disc['media'] }}</div>
                     <div style="font-size:10px;color:{{ $cor }}">{{ $disc['media'] >= 7 ? 'Aprovado' : ($disc['media'] >= 5 ? 'Recuperação' : 'Reprovado') }}</div>
                     @else
-                    <div style="font-size:16px;font-weight:700;color:var(--text-soft)">—</div>
+                    <div style="font-size:16px;font-weight:700;color:var(--text-soft)">-</div>
                     @endif
                 </div>
             </div>
@@ -105,7 +105,7 @@
                         <div style="font-size:22px;font-weight:800;color:{{ $nc }};line-height:1">{{ number_format($n, 1) }}</div>
                         <div style="font-size:10px;color:var(--text-soft)">/{{ number_format($max, 0) }}</div>
                         @else
-                        <div style="font-size:18px;font-weight:700;color:var(--text-soft)">—</div>
+                        <div style="font-size:18px;font-weight:700;color:var(--text-soft)">-</div>
                         @endif
                     </div>
                 </div>

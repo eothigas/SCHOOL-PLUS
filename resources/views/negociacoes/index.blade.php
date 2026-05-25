@@ -2,10 +2,10 @@
 @section('title', 'Negociações')
 
 @section('content')
-<div class="d-flex align-items-center justify-content-between mb-4">
+<div class="sp-page-hdr">
     <div>
-        <h4 style="font-size:20px;font-weight:800;color:var(--text);margin-bottom:2px">Negociações</h4>
-        <div style="font-size:13px;color:var(--text-soft)">Acordos de débitos com alunos inadimplentes</div>
+        <h1 class="sp-page-hdr-title">Negociações</h1>
+        <div class="sp-page-hdr-sub">Acordos de débitos com alunos inadimplentes</div>
     </div>
     <a href="{{ route('negociacoes.create') }}" class="btn btn-primary">
         <i class="bi bi-handshake me-1"></i>Nova Negociação
@@ -34,13 +34,13 @@
             @endphp
             <tr>
                 <td style="color:var(--text-soft);font-size:12px">#{{ $neg->id }}</td>
-                <td style="font-weight:600">{{ $neg->matricula->aluno->usuario->nome ?? '—' }}</td>
+                <td style="font-weight:600">{{ $neg->matricula->aluno->usuario->nome ?? '-' }}</td>
                 <td style="font-size:13px;color:var(--text-soft)">R$ {{ number_format($neg->valor_total, 2, ',', '.') }}</td>
                 <td>
                     @if($neg->desconto_pct > 0)
                     <span class="badge-sp badge-green">{{ $neg->desconto_pct }}%</span>
                     @else
-                    <span style="color:var(--text-soft);font-size:12px">—</span>
+                    <span style="color:var(--text-soft);font-size:12px">-</span>
                     @endif
                 </td>
                 <td style="font-weight:700;color:var(--purple)">R$ {{ number_format($vf, 2, ',', '.') }}</td>
@@ -49,9 +49,9 @@
                     <span style="font-size:11px;color:var(--text-soft)">R$ {{ number_format($vf / $neg->qtd_parcelas, 2, ',', '.') }}</span>
                 </td>
                 <td style="font-size:13px">{{ \Carbon\Carbon::parse($neg->criado_em)->format('d/m/Y') }}</td>
-                <td style="font-size:12px;color:var(--text-soft)">{{ $neg->usuario->nome ?? '—' }}</td>
-                <td>
-                    <a href="{{ route('negociacoes.show', $neg) }}" class="btn btn-sm btn-outline-primary">
+                <td style="font-size:12px;color:var(--text-soft)">{{ $neg->usuario->nome ?? '-' }}</td>
+                <td style="text-align:right">
+                    <a href="{{ route('negociacoes.show', $neg) }}" class="icon-btn" title="Ver detalhes">
                         <i class="bi bi-eye"></i>
                     </a>
                 </td>

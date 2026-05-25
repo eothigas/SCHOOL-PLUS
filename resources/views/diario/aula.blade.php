@@ -5,7 +5,7 @@
 <div class="d-flex align-items-start justify-content-between mb-4">
     <div>
         <h4 style="font-size:20px;font-weight:800;color:var(--text);margin-bottom:4px">
-            Frequência — {{ $aula->data_aula->format('d/m/Y') }}
+            Frequência - {{ $aula->data_aula->format('d/m/Y') }}
         </h4>
         <div style="font-size:13px;color:var(--text-soft)">
             {{ $td->disciplina->nome }} &middot; {{ $td->turma->nome }}
@@ -64,7 +64,7 @@
         @endif
 
         @foreach($aula->frequencias as $freq)
-        @php $nome = $freq->matricula->aluno->usuario->nome ?? '—'; @endphp
+        @php $nome = $freq->matricula->aluno->usuario->nome ?? '-'; @endphp
         <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid var(--border)"
              id="row-{{ $freq->id }}">
             <div style="display:flex;align-items:center;gap:12px">

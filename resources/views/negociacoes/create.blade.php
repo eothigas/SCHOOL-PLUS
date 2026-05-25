@@ -36,7 +36,7 @@
                 @if($matricula)
                 <div style="background:var(--purple-light);border-radius:12px;padding:14px 16px;font-size:13px">
                     <div style="font-weight:700;color:var(--purple)">{{ $matricula->aluno->usuario->nome }}</div>
-                    <div style="color:var(--text-soft);margin-top:2px">{{ $matricula->turma->nome ?? '—' }}</div>
+                    <div style="color:var(--text-soft);margin-top:2px">{{ $matricula->turma->nome ?? '-' }}</div>
                     @if($cobrancas_vencidas->isEmpty())
                     <div style="color:var(--green);margin-top:8px;font-size:12px">
                         <i class="bi bi-check-circle-fill me-1"></i>Sem débitos vencidos
@@ -129,19 +129,19 @@
                     <div style="display:flex;gap:20px;flex-wrap:wrap">
                         <div>
                             <div style="font-size:11px;color:var(--text-soft)">Total Original</div>
-                            <div style="font-size:18px;font-weight:800" id="rTotal">R$ —</div>
+                            <div style="font-size:18px;font-weight:800" id="rTotal">R$ -</div>
                         </div>
                         <div>
                             <div style="font-size:11px;color:var(--text-soft)">Desconto</div>
-                            <div style="font-size:18px;font-weight:800;color:var(--green)" id="rDesconto">R$ —</div>
+                            <div style="font-size:18px;font-weight:800;color:var(--green)" id="rDesconto">R$ -</div>
                         </div>
                         <div>
                             <div style="font-size:11px;color:var(--text-soft)">Valor Final</div>
-                            <div style="font-size:18px;font-weight:800;color:var(--purple)" id="rFinal">R$ —</div>
+                            <div style="font-size:18px;font-weight:800;color:var(--purple)" id="rFinal">R$ -</div>
                         </div>
                         <div>
                             <div style="font-size:11px;color:var(--text-soft)">Por Parcela</div>
-                            <div style="font-size:18px;font-weight:800;color:var(--blue)" id="rParcela">R$ —</div>
+                            <div style="font-size:18px;font-weight:800;color:var(--blue)" id="rParcela">R$ -</div>
                         </div>
                     </div>
                 </div>

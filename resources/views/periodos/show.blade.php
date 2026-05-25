@@ -7,12 +7,12 @@
 @endsection
 
 @section('content')
-<div class="d-flex align-items-center justify-content-between mb-4">
+<div class="sp-page-hdr">
     <div>
-        <h4 class="mb-1 fw-bold">{{ $periodo->nome }}</h4>
-        <small class="text-muted">
+        <h1 class="sp-page-hdr-title">{{ $periodo->nome }}</h1>
+        <div class="sp-page-hdr-sub">
             {{ $periodo->data_inicio->format('d/m/Y') }} até {{ $periodo->data_fim->format('d/m/Y') }}
-        </small>
+        </div>
     </div>
     <div class="d-flex gap-2">
         <a href="{{ route('periodos.edit', $periodo) }}" class="btn btn-sm btn-outline-primary">
@@ -26,7 +26,7 @@
 
 <div class="row g-3">
     <div class="col-md-3">
-        <div class="card-sp p-4">
+        <div class="sp-card p-4">
             <dl class="row mb-0" style="font-size:14px; row-gap:6px">
                 <dt class="col-5 text-muted fw-normal">Status</dt>
                 <dd class="col-7">
@@ -48,15 +48,14 @@
     </div>
 
     <div class="col-md-9">
-        <div class="card-sp p-0">
-            <div class="d-flex align-items-center justify-content-between p-3 border-bottom" style="border-color:#1e2d47!important">
+        <div class="sp-card p-0">
+            <div class="d-flex align-items-center justify-content-between p-3 border-bottom" >
                 <h6 class="mb-0 fw-semibold">Turmas neste Período</h6>
                 <a href="{{ route('turmas.create') }}" class="btn btn-sm btn-outline-primary">
                     <i class="bi bi-plus-lg me-1"></i>Nova Turma
                 </a>
             </div>
-            <div class="table-responsive">
-                <table class="table table-sp table-hover mb-0">
+                <table class="sp-table">
                     <thead>
                         <tr>
                             <th>Turma</th>
@@ -73,8 +72,8 @@
                                     {{ $turma->nome }}
                                 </a>
                             </td>
-                            <td class="text-muted" style="font-size:13px">{{ $turma->curso->nome ?? '—' }}</td>
-                            <td><span class="badge bg-secondary" style="font-size:10px">{{ ucfirst($turma->turno) }}</span></td>
+                            <td class="text-muted" style="font-size:13px">{{ $turma->curso->nome ?? '-' }}</td>
+                            <td><span class="badge-sp badge-muted">{{ ucfirst($turma->turno) }}</span></td>
                             <td>
                                 <span class="badge rounded-pill badge-status-{{ $turma->status }}" style="font-size:10px">
                                     {{ str_replace('_', ' ', $turma->status) }}

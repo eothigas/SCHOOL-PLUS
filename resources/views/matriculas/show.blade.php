@@ -7,8 +7,11 @@
 @endsection
 
 @section('content')
-<div class="d-flex align-items-center justify-content-between mb-4">
-    <h4 class="mb-0 fw-bold">Matrícula #{{ $matricula->id }}</h4>
+<div class="sp-page-hdr">
+    <div>
+        <h1 class="sp-page-hdr-title">Matrícula #{{ $matricula->id }}</h1>
+        <div class="sp-page-hdr-sub">{{ $matricula->aluno->usuario->nome ?? '' }}</div>
+    </div>
     <a href="{{ route('matriculas.index') }}" class="btn btn-sm btn-outline-secondary">
         <i class="bi bi-arrow-left me-1"></i>Voltar
     </a>
@@ -16,27 +19,27 @@
 
 <div class="row g-3">
     <div class="col-md-4">
-        <div class="card-sp p-4">
+        <div class="sp-card p-4">
             <h6 class="fw-semibold mb-3 text-muted small text-uppercase">Dados da Matrícula</h6>
             <dl class="row mb-0" style="font-size:14px; row-gap:6px">
                 <dt class="col-5 text-muted fw-normal">Aluno</dt>
                 <dd class="col-7 fw-semibold">
                     <a href="{{ route('alunos.show', $matricula->aluno) }}" class="text-decoration-none">
-                        {{ $matricula->aluno->usuario->nome ?? '—' }}
+                        {{ $matricula->aluno->usuario->nome ?? '-' }}
                     </a>
                 </dd>
 
                 <dt class="col-5 text-muted fw-normal">Nº Matrícula</dt>
-                <dd class="col-7"><code>{{ $matricula->aluno->matricula ?? '—' }}</code></dd>
+                <dd class="col-7"><code>{{ $matricula->aluno->matricula ?? '-' }}</code></dd>
 
                 <dt class="col-5 text-muted fw-normal">Turma</dt>
-                <dd class="col-7">{{ $matricula->turma->nome ?? '—' }}</dd>
+                <dd class="col-7">{{ $matricula->turma->nome ?? '-' }}</dd>
 
                 <dt class="col-5 text-muted fw-normal">Curso</dt>
-                <dd class="col-7">{{ $matricula->turma->curso->nome ?? '—' }}</dd>
+                <dd class="col-7">{{ $matricula->turma->curso->nome ?? '-' }}</dd>
 
                 <dt class="col-5 text-muted fw-normal">Período</dt>
-                <dd class="col-7">{{ $matricula->periodo->nome ?? '—' }}</dd>
+                <dd class="col-7">{{ $matricula->periodo->nome ?? '-' }}</dd>
 
                 <dt class="col-5 text-muted fw-normal">Data</dt>
                 <dd class="col-7">{{ $matricula->data_matricula?->format('d/m/Y') }}</dd>
@@ -50,7 +53,7 @@
             </dl>
 
             @if($matricula->obs)
-            <div class="mt-3 pt-3 border-top" style="border-color:#1e2d47!important">
+            <div class="mt-3 pt-3 border-top" >
                 <div class="text-muted small mb-1">Observações</div>
                 <p class="mb-0" style="font-size:14px">{{ $matricula->obs }}</p>
             </div>
@@ -59,7 +62,7 @@
     </div>
 
     <div class="col-md-8">
-        <div class="card-sp p-4">
+        <div class="sp-card p-4">
             <h6 class="fw-semibold mb-3">Alterar Status</h6>
             <form method="POST" action="{{ route('matriculas.status', $matricula) }}" class="d-flex gap-2 align-items-end">
                 @csrf @method('PATCH')

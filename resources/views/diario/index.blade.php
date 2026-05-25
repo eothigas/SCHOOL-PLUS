@@ -6,7 +6,7 @@
 <div class="d-flex align-items-start justify-content-between mb-4">
     <div>
         <h4 style="font-size:20px;font-weight:800;color:var(--text);margin-bottom:4px">
-            Diário — {{ $td->disciplina->nome }}
+            Diário - {{ $td->disciplina->nome }}
         </h4>
         <div style="font-size:13px;color:var(--text-soft)">
             <i class="bi bi-grid me-1"></i>{{ $td->turma->nome }}
@@ -192,7 +192,7 @@
                     <div style="width:34px;height:34px;border-radius:10px;background:var(--purple-light);display:flex;align-items:center;justify-content:center;flex-shrink:0">
                         <i class="bi bi-person" style="color:var(--purple)"></i>
                     </div>
-                    <div style="font-size:13px;font-weight:600">{{ $mat->aluno->usuario->nome ?? '—' }}</div>
+                    <div style="font-size:13px;font-weight:600">{{ $mat->aluno->usuario->nome ?? '-' }}</div>
                 </div>
                 @if(isset($stats_freq[$mat->id]))
                 <div style="font-size:12px;font-weight:700;color:{{ $stats_freq[$mat->id] >= 75 ? 'var(--green)' : 'var(--red)' }}">

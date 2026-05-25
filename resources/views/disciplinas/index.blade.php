@@ -2,25 +2,24 @@
 @section('title', 'Disciplinas')
 
 @section('content')
-<div class="d-flex align-items-center justify-content-between mb-4">
+<div class="sp-page-hdr">
     <div>
-        <h4 style="font-size:20px;font-weight:800;color:var(--text);margin-bottom:2px">Disciplinas</h4>
-        <div style="font-size:13px;color:var(--text-soft)">Gerencie as disciplinas dos cursos</div>
+        <h1 class="sp-page-hdr-title">Disciplinas</h1>
+        <div class="sp-page-hdr-sub">Gerencie as disciplinas dos cursos</div>
     </div>
     <a href="{{ route('disciplinas.create') }}" class="btn btn-primary">
         <i class="bi bi-plus-lg me-1"></i>Nova Disciplina
     </a>
 </div>
 
-{{-- Filtros --}}
-<div class="sp-card mb-4">
+<div class="sp-card" style="padding:20px;margin-bottom:16px">
     <form method="GET" class="row g-2 align-items-end">
         <div class="col-md-5">
-            <label class="form-label">Buscar</label>
+            <label class="form-label text-muted small">Buscar</label>
             <input type="text" name="busca" class="form-control" placeholder="Nome da disciplina..." value="{{ request('busca') }}">
         </div>
         <div class="col-md-4">
-            <label class="form-label">Curso</label>
+            <label class="form-label text-muted small">Curso</label>
             <select name="curso_id" class="form-select">
                 <option value="">Todos os cursos</option>
                 @foreach($cursos as $curso)
@@ -32,14 +31,13 @@
             <button type="submit" class="btn btn-primary flex-fill">
                 <i class="bi bi-search me-1"></i>Filtrar
             </button>
-            <a href="{{ route('disciplinas.index') }}" class="btn btn-outline-secondary">
+            <a href="{{ route('disciplinas.index') }}" class="btn btn-outline-secondary" data-no-loading>
                 <i class="bi bi-x-lg"></i>
             </a>
         </div>
     </form>
 </div>
 
-{{-- Tabela --}}
 <div class="sp-card" style="padding:0">
     <table class="sp-table">
         <thead>
@@ -62,37 +60,42 @@
                         <span style="color:var(--text-soft)">—</span>
                     @endif
                 </td>
-                <td style="font-size:13px;color:var(--text-soft)">{{ $disc->curso->nome ?? '—' }}</td>
-                <td>
-                    @if($disc->carga_horaria)
-                        <span style="font-size:13px">{{ $disc->carga_horaria }}h</span>
-                    @else
-                        <span style="color:var(--text-soft)">—</span>
-                    @endif
+                <td style="font-size:13px;color:var(--text-soft)">{{ $disc->curso->nome ?? '-' }}</td>
+                <td style="font-size:13px;color:var(--text-soft)">
+                    {{ $disc->carga_horaria ? $disc->carga_horaria . 'h' : '—' }}
                 </td>
                 <td style="text-align:right">
-                    <a href="{{ route('disciplinas.edit', $disc) }}" class="btn btn-sm btn-outline-primary me-1">
-                        <i class="bi bi-pencil"></i>
-                    </a>
-                    <form method="POST" action="{{ route('disciplinas.destroy', $disc) }}" class="d-inline"
-                          onsubmit="return confirm('Desativar disciplina?')">
-                        @csrf @method('DELETE')
-                        <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
-                    </form>
+                    <div style="display:flex;justify-content:flex-end;gap:6px">
+                        <a href="{{ route('disciplinas.edit', $disc) }}" class="icon-btn" title="Editar">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                        <form method="POST" action="{{ route('disciplinas.destroy', $disc) }}" class="d-inline"
+                              onsubmit="return confirm('Desativar disciplina?')">
+                            @csrf @method('DELETE')
+                            <button class="icon-btn danger" type="submit" title="Desativar" data-no-spin>
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </form>
+                    </div>
                 </td>
             </tr>
             @empty
             <tr>
-                <td colspan="5" style="text-align:center;color:var(--text-soft);padding:40px">
-                    Nenhuma disciplina encontrada.
-                    <a href="{{ route('disciplinas.create') }}" style="color:var(--purple)">Criar agora</a>
+                <td colspan="5">
+                    <div class="sp-empty">
+                        <i class="bi bi-book"></i>
+                        <div class="sp-empty-title">Nenhuma disciplina encontrada</div>
+                        <div class="sp-empty-sub">
+                            <a href="{{ route('disciplinas.create') }}">Criar agora</a>
+                        </div>
+                    </div>
                 </td>
             </tr>
             @endforelse
         </tbody>
     </table>
     @if($disciplinas->hasPages())
-    <div style="padding:16px 20px">
+    <div style="padding:14px 20px;border-top:1px solid var(--border)">
         {{ $disciplinas->links() }}
     </div>
     @endif
